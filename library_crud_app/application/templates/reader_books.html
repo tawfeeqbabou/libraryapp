@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block body %}
+{% for books in all_books %}
+<p>
+    Enter Your Book Title: {{ books.book_title }}<br>
+    Please Enter Book Author: {{ books.book_author }}<br>
+    Enter The Genre Of Your Book: {{ books.genre }}<br>
+    When Did You Finish This Book: {{ books.date_of_completion }}<br>
+    <a href = "{{url_for('edit_book', book_id=books.id) }}"> Edit your book entry || </a>
+    <a href = "{{url_for('delete_book', book_id=books.id) }}"> Delete your book entry </a>
+</p>   
+{%endfor%}
+{% endblock body %}
