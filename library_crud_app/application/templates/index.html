@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+{% for readers in all_readers %}
+<p>
+    Log your completed books below and we'll keep track of them for you!: {{ readers.reader_name }}<br>
+    <a href = "{{url_for('add_book', read_id=readers.id) }}"> Log a new book || </a>
+    <a href = "{{url_for('reader_books', read_id=readers.id) }}"> View completed books || </a>
+    <a href = "{{url_for('edit_reader', read_id=readers.id) }}"> Edit your reader name || </a>
+    <a href = "{{url_for('delete_reader', read_id=readers.id) }}"> Delete your reader name </a>
+</p>
+{%endfor%}
+{% endblock body %}

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+    <head>
+    <title>My Library App</title>
+    </head>
+        <body>
+            <navbar>
+            <a href = "{{url_for('index') }}"> Main Page || </a>
+            <a href = "{{url_for('add_reader') }}"> Add a reader </a>
+            </navbar>
+    <h1>My Library App</h1>
+    {% block body %}
+    {% endblock body %}
+        </body>
