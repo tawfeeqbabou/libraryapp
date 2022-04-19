@@ -3,15 +3,17 @@ from flask import request, redirect, render_template, url_for
 from application.models import Readers, Books
 from application.forms import ReadersForm, BooksForm
 
+# Home app route
 @app.route("/")
 def index():
     all_readers = Readers.query.all()
     return render_template("index.html", all_readers = all_readers)
 
+# App route adds reader
 @app.route("/add_reader", methods=["GET", "POST"])
 def add_reader():
     form = ReadersForm()
-
+# if the method is post then the form will be committed to the database
     if request.method == "POST":
         reader = Readers(reader_name = form.reader_name.data)
         db.session.add(reader)
@@ -20,10 +22,11 @@ def add_reader():
 
     return render_template("add_reader.html", form = form)
 
+# Adding book with reader id
 @app.route("/add_book/<int:read_id>", methods=["GET", "POST"])
 def add_book(read_id):
     form = BooksForm()
-
+# if the method is post then the form will be committed to the database
     if request.method == "POST":
         books = Books(reader_id = read_id, book_title = form.book_title.data, book_author = form.book_author.data, 
                     genre = form.genre.data, date_of_completion = form.date_of_completion.data)
@@ -34,6 +37,7 @@ def add_book(read_id):
 
     return render_template("add_book.html", form = form)
 
+# Viewing book added
 @app.route("/reader_books/<int:read_id>")
 def reader_books(read_id):
     all_books = Books.query.filter_by(reader_id=read_id).all()
